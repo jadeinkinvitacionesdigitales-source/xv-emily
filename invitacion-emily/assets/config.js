@@ -1,2 +1,2 @@
 // URL de la aplicación web de Apps Script (termina en /exec).
-window.INVITACION = { api: 'https://script.google.com/macros/s/AKfycbwp99-3-NC5FkIHXIiMokJsENY6gCc6VbklQYSUeepHY9YYv7I0FL6bpN_kkxzDjkR9/exec' };
+window.INVITACION = { api: 'https://script.google.com/macros/s/AKfycbx7pLEweHZdFZ1oh4cWoFJSopYkGdjobInfpv8pV67V9Upd3q0mIIXvKCE1Bbp2yWD7/exec' };
