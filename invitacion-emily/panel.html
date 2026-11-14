@@ -307,7 +307,9 @@ $('form-login').addEventListener('submit', function (e) {
     try { sessionStorage.setItem('panel-clave', clave); } catch (e) {}
     $('login-aviso').textContent = '';
   }).catch(function (err) {
-    $('login-aviso').textContent = err.message === 'clave' ? 'Contraseña incorrecta.' : 'No se pudo conectar. Revisa la URL de Apps Script.';
+    $('login-aviso').textContent = err.message === 'clave' ? 'Contraseña incorrecta.' :
+      /fetch|network|load/i.test(err.message) ? 'No se pudo conectar con Google. Revisa tu internet e inténtalo de nuevo.' :
+      'Error de la hoja de Google: ' + err.message;
   });
 });
 function salir() {
