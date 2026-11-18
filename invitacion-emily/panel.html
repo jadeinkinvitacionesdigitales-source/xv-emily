@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#e8b9b0">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Panel de invitados · XV Emily Victoria">
-<meta property="og:description" content="Administra invitados, confirmaciones y mensajes.">
+<meta property="og:description" content="Invitaciones personalizadas, confirmaciones y mensajes.">
 <meta property="og:image" content="https://jadeinkinvitacionesdigitales-source.github.io/xv-emily/invitacion-emily/assets/vista-previa.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -21,121 +21,152 @@
   --tinta: #2a1a17;
   --suave: #6a5550;
   --rosa: #c9707e;
-  --rosa-claro: #f5d6d3;
+  --rosa-osc: #b35d6b;
   --oro: #b98a52;
   --oro-claro: #e8c9a0;
   --crema: #fff8f3;
+  --linea: #ead6cc;
   --si: #3f7d58;
+  --si-f: #e7f3eb;
   --no: #b0474f;
-  --pend: #9a7a3c;
+  --no-f: #f8e6e7;
+  --pend: #94723a;
+  --pend-f: #f6efe0;
 }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; min-height: 100svh;
   background: linear-gradient(170deg, #f7e1da 0%, #ecc3bb 55%, #e0a99f 100%) fixed;
   color: var(--tinta);
-  font: 14px/1.6 "Libre Baskerville", Georgia, serif;
+  font: 14px/1.55 "Libre Baskerville", Georgia, serif;
 }
 [hidden] { display: none !important; }
-button, input, select { font: inherit; color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
 .script { font-family: "Ms Madi", cursive; font-weight: 400; -webkit-text-stroke: .3px currentColor; line-height: 1.05; margin: 0; }
-.envoltura { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
-
-.tarjeta {
-  background: rgba(255, 248, 243, .94);
+.cont { max-width: 760px; margin: 0 auto; padding: 18px 14px 90px; }
+.caja {
+  background: rgba(255, 248, 243, .96);
   border: 1px solid var(--oro); outline: 1px solid var(--oro-claro); outline-offset: -5px;
-  border-radius: 6px; box-shadow: 0 8px 26px rgba(130, 85, 60, .14);
-  padding: 20px;
+  border-radius: 8px; box-shadow: 0 8px 24px rgba(130, 85, 60, .13);
+  padding: 18px;
 }
+.caja + .caja { margin-top: 12px; }
+h2.titulo { font-size: 15px; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+h2.titulo .num { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--rosa); color: #fff; font-size: 12px; }
 
-.boton {
-  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  min-height: 40px; padding: 8px 16px;
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 42px; padding: 9px 16px;
   border: 1px solid var(--oro); border-radius: 999px;
-  background: linear-gradient(180deg, #fff6ee, #f6d8d4);
-  color: var(--tinta); font-weight: 700; font-size: 12.5px; text-decoration: none; cursor: pointer; white-space: nowrap;
+  background: linear-gradient(180deg, #fff6ee, #f6d8d4); color: var(--tinta);
+  font-weight: 700; font-size: 13px; text-decoration: none; cursor: pointer; white-space: nowrap;
 }
-.boton:hover { background: linear-gradient(180deg, #fff, #f5d6d3); }
-.boton.primario { background: var(--rosa); border-color: var(--rosa); color: #fff; }
-.boton.chico { min-height: 34px; padding: 5px 12px; font-size: 12px; }
-.boton.peligro { color: var(--no); border-color: #d9a3a6; }
-.boton:disabled { opacity: .6; cursor: wait; }
-.boton svg { width: 15px; height: 15px; flex: none; }
+.btn:hover { background: linear-gradient(180deg, #fff, #f5d6d3); }
+.btn.prim { background: var(--rosa); border-color: var(--rosa); color: #fff; }
+.btn.prim:hover { background: var(--rosa-osc); }
+.btn.wa { background: #2f8f5b; border-color: #2f8f5b; color: #fff; }
+.btn.wa:hover { background: #27794c; }
+.btn.chico { min-height: 36px; padding: 6px 12px; font-size: 12px; }
+.btn.peligro { color: var(--no); border-color: #dcaaad; background: #fff; }
+.btn.ancho { width: 100%; }
+.btn:disabled { opacity: .55; cursor: wait; }
+.btn svg { width: 16px; height: 16px; flex: none; }
 :focus-visible { outline: 2px solid var(--rosa); outline-offset: 2px; }
 
-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8a6036; margin-bottom: 4px; }
-input, select {
-  width: 100%; min-height: 42px; padding: 8px 12px;
-  border: 1px solid var(--oro); border-radius: 6px; background: #fff; font-size: 16px;
+label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8a6036; margin-bottom: 5px; }
+input, select, textarea {
+  width: 100%; min-height: 44px; padding: 9px 12px;
+  border: 1px solid var(--oro); border-radius: 8px; background: #fff; font-size: 16px;
 }
+textarea { resize: vertical; line-height: 1.5; }
+.ayuda { font-size: 12px; color: var(--suave); margin: 4px 0 0; }
 
-/* Login */
+/* Acceso */
 .login { max-width: 380px; margin: 12svh auto 0; text-align: center; }
-.login h1 { font-size: 52px; margin-bottom: 2px; }
-.login p { color: var(--suave); margin: 0 0 16px; }
+.login h1 { font-size: 54px; }
+.login p { color: var(--suave); margin: 2px 0 18px; }
 .login form { display: grid; gap: 12px; text-align: left; }
-.aviso { font-size: 13px; font-weight: 700; color: var(--no); min-height: 1.2em; margin: 0; text-align: center; }
+.aviso { font-size: 13px; font-weight: 700; color: var(--no); margin: 0; text-align: center; min-height: 1.2em; }
 
 /* Cabecera */
-.cabecera { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-.cabecera h1 { font-size: 44px; }
-.cabecera .sub { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #8a6036; margin: 0; }
-.cabecera .acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+.cabecera { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.cabecera .sub { margin: 0; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #8a6036; }
+.cabecera h1 { font-size: 42px; }
+.cabecera .acc { display: flex; gap: 6px; flex-wrap: wrap; }
 
 /* Resumen */
-.resumen { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
-.cifra { padding: 14px 12px; text-align: center; }
-.cifra b { display: block; font-family: Tinos, serif; font-size: 34px; line-height: 1.1; color: var(--rosa); font-variant-numeric: tabular-nums; }
-.cifra span { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #8a6036; font-weight: 700; }
-.cifra small { display: block; color: var(--suave); font-size: 11.5px; }
-.cifra.si b { color: var(--si); }
-.cifra.no b { color: var(--no); }
-.cifra.pend b { color: var(--pend); }
-.barra { height: 8px; border-radius: 99px; background: #f1e1dc; overflow: hidden; display: flex; margin: 0 0 16px; }
-.barra i { display: block; height: 100%; }
+.resumen { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 8px; }
+.cifra { text-align: center; padding: 12px 6px; }
+.cifra b { display: block; font: 700 30px/1.1 Tinos, serif; font-variant-numeric: tabular-nums; color: var(--rosa); }
+.cifra > span { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #8a6036; }
+.cifra small { display: block; font-size: 11px; color: var(--suave); }
+.cifra.si b { color: var(--si); } .cifra.no b { color: var(--no); } .cifra.pend b { color: var(--pend); }
+.barra { display: flex; height: 8px; border-radius: 99px; overflow: hidden; background: #f1e1dc; margin: 0 0 14px; }
+.barra i { height: 100%; }
 
 /* Pestañas */
-.pestanas { display: flex; gap: 6px; margin-bottom: 12px; }
+.pestanas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0 -14px 12px; position: sticky; top: 0; z-index: 5; padding: 8px 14px; background: #efcdc6; box-shadow: 0 6px 12px -8px rgba(120, 70, 60, .35); }
 .pestanas button {
-  flex: 1; min-height: 42px; border: 1px solid var(--oro); border-radius: 6px;
-  background: rgba(255,248,243,.7); font-weight: 700; cursor: pointer;
+  min-height: 44px; border: 1px solid var(--oro); border-radius: 8px; cursor: pointer;
+  background: rgba(255, 248, 243, .85); font-weight: 700; font-size: 13px;
 }
 .pestanas button[aria-selected="true"] { background: var(--crema); box-shadow: inset 0 -3px 0 var(--rosa); }
+.pestanas .cuenta { display: inline-block; min-width: 20px; padding: 0 6px; border-radius: 99px; background: var(--rosa); color: #fff; font-size: 11px; margin-left: 4px; }
 
-/* Agregar */
-.agregar { display: grid; grid-template-columns: 2fr 90px 1.2fr auto; gap: 10px; align-items: end; margin-bottom: 14px; }
-.agregar h2 { grid-column: 1 / -1; margin: 0; font-size: 15px; }
-.nuevo-enlace { grid-column: 1 / -1; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 10px 12px; border-radius: 6px; background: #f3e7dc; font-size: 13px; }
-.nuevo-enlace code { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 12px; }
+/* Crear invitación */
+.form-nueva { display: grid; grid-template-columns: 1fr 140px; gap: 12px; }
+.form-nueva .todo { grid-column: 1 / -1; }
+.contador { display: flex; align-items: stretch; border: 1px solid var(--oro); border-radius: 8px; overflow: hidden; background: #fff; }
+.contador button { width: 44px; border: 0; background: #f6e3de; font-size: 20px; font-weight: 700; cursor: pointer; }
+.contador input { border: 0; border-radius: 0; text-align: center; min-width: 0; font-weight: 700; -moz-appearance: textfield; }
+.contador input::-webkit-inner-spin-button, .contador input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
-.filtros { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-.filtros input { flex: 1 1 200px; }
-.filtros select { flex: 0 0 170px; }
+.lista-envio { border: 2px dashed var(--rosa); background: #fffaf7; }
+.lista-envio .para { margin: 0 0 10px; font-size: 13px; color: var(--suave); }
+.lista-envio .para b { color: var(--tinta); }
+.lista-envio .botones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.lista-envio .botones .btn.wa { grid-column: 1 / -1; }
 
-/* Lista */
+/* Filtros */
+.filtros { display: flex; gap: 8px; margin: 14px 0 10px; flex-wrap: wrap; }
+.filtros input { flex: 1 1 220px; }
+.filtros select { flex: 0 0 180px; }
+
+/* Tarjetas de invitado */
 .lista { display: grid; gap: 10px; }
-.invitado { padding: 14px 16px; display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; }
-.invitado h3 { margin: 0; font-size: 16px; overflow-wrap: anywhere; }
-.invitado .meta { color: var(--suave); font-size: 12.5px; }
-.invitado .meta code { font-size: 12px; letter-spacing: .08em; }
-.invitado .botones { grid-column: 1 / -1; display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
-.estado { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 11.5px; font-weight: 700; white-space: nowrap; border: 1px solid currentColor; }
-.estado.si { color: var(--si); background: #e8f3ec; }
-.estado.no { color: var(--no); background: #f8e6e7; }
-.estado.pend { color: var(--pend); background: #f6efe0; }
-.vacio { text-align: center; color: var(--suave); padding: 30px 16px; }
+.inv { padding: 14px 16px; }
+.inv .fila1 { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.inv h3 { margin: 0; font-size: 16px; overflow-wrap: anywhere; }
+.inv .meta { font-size: 12.5px; color: var(--suave); margin-top: 2px; }
+.inv .meta code { font-size: 11.5px; letter-spacing: .08em; }
+.inv .acciones { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.chip { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: 11.5px; font-weight: 700; border: 1px solid currentColor; white-space: nowrap; }
+.chip.si { color: var(--si); background: var(--si-f); }
+.chip.no { color: var(--no); background: var(--no-f); }
+.chip.pend { color: var(--pend); background: var(--pend-f); }
+.vacio { text-align: center; color: var(--suave); padding: 28px 16px; }
 
-.mensaje { padding: 16px; }
-.mensaje header { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; flex-wrap: wrap; margin-bottom: 6px; }
-.mensaje h3 { margin: 0; font-size: 15px; }
-.mensaje time { font-size: 12px; color: var(--suave); }
-.mensaje p { margin: 0 0 10px; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--suave); font-style: italic; }
+/* Confirmaciones */
+.grupo h3 { margin: 0 0 8px; font-size: 14px; display: flex; justify-content: space-between; align-items: baseline; }
+.grupo h3 small { font-weight: 400; color: var(--suave); font-size: 12px; }
+.grupo ul { list-style: none; margin: 0; padding: 0; }
+.grupo li { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-top: 1px solid var(--linea); font-size: 13.5px; }
+.grupo li:first-child { border-top: 0; }
+.grupo li span:last-child { color: var(--suave); white-space: nowrap; font-size: 12.5px; text-align: right; }
+.grupo.si h3 { color: var(--si); } .grupo.no h3 { color: var(--no); } .grupo.pend h3 { color: var(--pend); }
 
-dialog { border: 0; padding: 0; background: none; width: min(420px, 92vw); }
+/* Mensajes */
+.msg header { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; margin-bottom: 6px; }
+.msg h3 { margin: 0; font-size: 15px; }
+.msg time { font-size: 12px; color: var(--suave); }
+.msg p { margin: 0 0 10px; white-space: pre-wrap; overflow-wrap: anywhere; font-style: italic; color: var(--suave); }
+
+dialog { border: 0; padding: 0; background: none; width: min(420px, 94vw); }
 dialog::backdrop { background: rgba(40, 22, 20, .55); }
 dialog form { display: grid; gap: 12px; }
 dialog h2 { margin: 0; font-size: 34px; }
-dialog .fila { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+dialog .fila { display: flex; gap: 8px; justify-content: flex-end; }
 
 .toast {
   position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); transform: translateX(-50%);
@@ -143,87 +174,106 @@ dialog .fila { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wr
   box-shadow: 0 6px 20px rgba(0,0,0,.25); z-index: 50; max-width: 92vw; text-align: center;
 }
 
-@media (max-width: 620px) {
+@media (max-width: 600px) {
   .resumen { grid-template-columns: repeat(2, 1fr); }
-  .agregar { grid-template-columns: 1fr 90px; }
-  .agregar .tel { grid-column: 1 / -1; }
-  .agregar .boton { grid-column: 1 / -1; }
+  .form-nueva { grid-template-columns: 1fr; }
   .filtros select { flex: 1 1 100%; }
-  .cabecera h1 { font-size: 38px; }
+  .cabecera h1 { font-size: 36px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Acceso -->
-<section class="envoltura" id="vista-login">
-  <div class="tarjeta login">
+<!-- ===== Acceso ===== -->
+<section class="cont" id="v-login">
+  <div class="caja login">
     <h1 class="script">Panel</h1>
     <p>XV Años de Emily Victoria</p>
-    <form id="form-login">
+    <form id="f-login">
       <div>
         <label for="clave">Contraseña</label>
         <input id="clave" type="password" autocomplete="current-password" required>
       </div>
-      <button class="boton primario" type="submit">Entrar</button>
+      <button class="btn prim ancho" type="submit">Entrar</button>
       <p class="aviso" id="login-aviso" role="status"></p>
     </form>
   </div>
 </section>
 
-<!-- Panel -->
-<section class="envoltura" id="vista-panel" hidden>
+<!-- ===== Panel ===== -->
+<section class="cont" id="v-panel" hidden>
   <header class="cabecera">
     <div>
       <p class="sub">XV Años · 26 dic 2026</p>
       <h1 class="script">Emily Victoria</h1>
     </div>
-    <div class="acciones">
-      <button class="boton chico" id="btn-actualizar" type="button">
+    <div class="acc">
+      <button class="btn chico" id="b-actualizar" type="button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>Actualizar</button>
-      <button class="boton chico" id="btn-csv" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M4 19h16"/></svg>Descargar lista</button>
-      <a class="boton chico" id="btn-ver" target="_blank" rel="noopener">Ver invitación</a>
-      <button class="boton chico" id="btn-salir" type="button">Salir</button>
+      <button class="btn chico" id="b-excel" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M4 19h16"/></svg>Excel</button>
+      <a class="btn chico" id="b-ver" target="_blank" rel="noopener">Ver invitación</a>
+      <button class="btn chico" id="b-salir" type="button">Salir</button>
     </div>
   </header>
 
   <div class="resumen">
-    <div class="tarjeta cifra"><b id="r-invitaciones">0</b><span>Invitaciones</span><small><span id="r-puestos">0</span> puestos</small></div>
-    <div class="tarjeta cifra si"><b id="r-si">0</b><span>Asistirán</span><small>puestos confirmados</small></div>
-    <div class="tarjeta cifra no"><b id="r-no">0</b><span>No asistirán</span><small>puestos</small></div>
-    <div class="tarjeta cifra pend"><b id="r-pend">0</b><span>Pendientes</span><small>puestos sin responder</small></div>
+    <div class="caja cifra"><b id="r-inv">0</b><span>Invitaciones</span><small><span id="r-tot">0</span> puestos</small></div>
+    <div class="caja cifra si"><b id="r-si">0</b><span>Asistirán</span><small>puestos</small></div>
+    <div class="caja cifra no"><b id="r-no">0</b><span>No asistirán</span><small>puestos</small></div>
+    <div class="caja cifra pend"><b id="r-pend">0</b><span>Pendientes</span><small>puestos</small></div>
   </div>
   <div class="barra" id="barra" aria-hidden="true"></div>
 
-  <div class="pestanas" role="tablist">
-    <button type="button" role="tab" aria-selected="true" aria-controls="tab-invitados" id="t-invitados">Invitados</button>
-    <button type="button" role="tab" aria-selected="false" aria-controls="tab-mensajes" id="t-mensajes">Mensajes (<span id="n-mensajes">0</span>)</button>
-  </div>
+  <nav class="pestanas" role="tablist">
+    <button type="button" role="tab" id="t-invitados" aria-controls="p-invitados" aria-selected="true">Invitados</button>
+    <button type="button" role="tab" id="t-confirmaciones" aria-controls="p-confirmaciones" aria-selected="false">Confirmaciones</button>
+    <button type="button" role="tab" id="t-mensajes" aria-controls="p-mensajes" aria-selected="false">Mensajes<span class="cuenta" id="n-msg">0</span></button>
+  </nav>
 
-  <div id="tab-invitados" role="tabpanel">
-    <form class="tarjeta agregar" id="form-agregar">
-      <h2>Agregar invitado</h2>
-      <div>
-        <label for="a-nombre">Nombre o familia</label>
-        <input id="a-nombre" maxlength="80" required placeholder="Familia Pérez">
+  <!-- Invitados -->
+  <div id="p-invitados" role="tabpanel">
+    <form class="caja" id="f-nueva">
+      <h2 class="titulo"><span class="num">1</span>Nueva invitación personalizada</h2>
+      <div class="form-nueva">
+        <div>
+          <label for="n-nombre">Nombre o familia</label>
+          <input id="n-nombre" maxlength="80" required placeholder="Familia Pérez">
+        </div>
+        <div>
+          <label for="n-puestos">Puestos</label>
+          <div class="contador">
+            <button type="button" data-paso="-1" aria-label="Quitar un puesto">−</button>
+            <input id="n-puestos" type="number" inputmode="numeric" min="1" max="99" value="2" required>
+            <button type="button" data-paso="1" aria-label="Agregar un puesto">+</button>
+          </div>
+        </div>
+        <div class="todo">
+          <label for="n-tel">WhatsApp del invitado (opcional)</label>
+          <input id="n-tel" type="tel" inputmode="tel" maxlength="20" placeholder="6000-0000">
+          <p class="ayuda">Si lo escribes, el botón de WhatsApp abre directo su chat.</p>
+        </div>
+        <button class="btn prim ancho todo" type="submit">Crear invitación</button>
       </div>
-      <div>
-        <label for="a-puestos">Puestos</label>
-        <input id="a-puestos" type="number" min="1" max="99" value="2" required>
-      </div>
-      <div class="tel">
-        <label for="a-tel">WhatsApp (opcional)</label>
-        <input id="a-tel" type="tel" maxlength="20" placeholder="6000-0000">
-      </div>
-      <button class="boton primario" type="submit">Agregar</button>
-      <div class="nuevo-enlace" id="nuevo-enlace" hidden></div>
     </form>
 
+    <div class="caja lista-envio" id="listo" hidden>
+      <h2 class="titulo"><span class="num">2</span>Lista para enviar</h2>
+      <p class="para">Para <b id="l-nombre"></b> · <span id="l-puestos"></span></p>
+      <label for="l-texto">Mensaje (puedes editarlo)</label>
+      <textarea id="l-texto" rows="6"></textarea>
+      <div class="botones">
+        <button class="btn wa" type="button" id="l-wa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8L4 20Z"/></svg>Enviar por WhatsApp</button>
+        <button class="btn" type="button" id="l-copiar">Copiar mensaje</button>
+        <a class="btn" id="l-probar" target="_blank" rel="noopener">Ver su invitación</a>
+      </div>
+    </div>
+
     <div class="filtros">
-      <input id="buscar" type="search" placeholder="Buscar invitado…" aria-label="Buscar invitado">
+      <input id="buscar" type="search" placeholder="Buscar por nombre o código…" aria-label="Buscar invitado">
       <select id="filtro" aria-label="Filtrar por respuesta">
-        <option value="">Todas las respuestas</option>
+        <option value="">Todos</option>
         <option value="Sí">Asistirán</option>
         <option value="No">No asistirán</option>
         <option value="pend">Pendientes</option>
@@ -232,268 +282,307 @@ dialog .fila { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wr
     <div class="lista" id="lista"></div>
   </div>
 
-  <div id="tab-mensajes" role="tabpanel" hidden>
-    <div class="lista" id="lista-mensajes"></div>
+  <!-- Confirmaciones -->
+  <div id="p-confirmaciones" role="tabpanel" hidden>
+    <div class="caja grupo si"><h3>Asistirán <small id="c-si-t"></small></h3><ul id="c-si"></ul></div>
+    <div class="caja grupo no"><h3>No asistirán <small id="c-no-t"></small></h3><ul id="c-no"></ul></div>
+    <div class="caja grupo pend"><h3>Pendientes <small id="c-pend-t"></small></h3><ul id="c-pend"></ul></div>
+  </div>
+
+  <!-- Mensajes -->
+  <div id="p-mensajes" role="tabpanel" hidden>
+    <div class="lista" id="lista-msg"></div>
   </div>
 </section>
 
-<dialog id="dlg-editar">
-  <form class="tarjeta" method="dialog" id="form-editar">
+<dialog id="d-editar">
+  <form class="caja" id="f-editar">
     <h2 class="script">Editar invitado</h2>
     <div><label for="e-nombre">Nombre o familia</label><input id="e-nombre" maxlength="80" required></div>
-    <div><label for="e-puestos">Puestos</label><input id="e-puestos" type="number" min="1" max="99" required></div>
+    <div><label for="e-puestos">Puestos</label><input id="e-puestos" type="number" inputmode="numeric" min="1" max="99" required></div>
     <div><label for="e-tel">WhatsApp</label><input id="e-tel" type="tel" maxlength="20"></div>
     <div>
       <label for="e-resp">Respuesta</label>
       <select id="e-resp"><option value="">Pendiente</option><option>Sí</option><option>No</option></select>
     </div>
     <div class="fila">
-      <button class="boton" type="button" id="e-cancelar">Cancelar</button>
-      <button class="boton primario" type="submit">Guardar</button>
+      <button class="btn" type="button" id="e-cancelar">Cancelar</button>
+      <button class="btn prim" type="submit">Guardar</button>
     </div>
   </form>
 </dialog>
 
 <p class="toast" id="toast" role="status" hidden></p>
 
-<script src="assets/config.js?v=4"></script>
+<script src="assets/config.js?v=5"></script>
 <script>
-var API = window.INVITACION && window.INVITACION.api;
-var QUINCEANERA = 'Emily Victoria';
-var BASE = new URL('./', location.href).href;
-var clave = '';
-try { clave = sessionStorage.getItem('panel-clave') || ''; } catch (e) {}
-var datos = { invitados: [], mensajes: [] };
-var editando = null;
+(function () {
+  var API = window.INVITACION && window.INVITACION.api;
+  var QUINCE = 'Emily Victoria';
+  var BASE = new URL('./', location.href).href;
+  var clave = '';
+  try { clave = sessionStorage.getItem('panel-emily') || ''; } catch (e) {}
+  var datos = { invitados: [], mensajes: [] };
+  var editando = null, ultimo = null;
 
-function $(id) { return document.getElementById(id); }
-function aviso(t) {
-  var el = $('toast'); el.textContent = t; el.hidden = false;
-  clearTimeout(aviso.t); aviso.t = setTimeout(function () { el.hidden = true; }, 2600);
-}
-function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-
-function llamar(datosPost) {
-  datosPost.clave = clave;
-  return fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(datosPost) })
-    .then(function (r) { return r.json(); })
-    .then(function (r) {
-      if (!r.ok && r.error === 'clave') { salir(); throw new Error('clave'); }
-      if (!r.ok) throw new Error(r.error || 'error');
-      return r;
-    });
-}
-
-function enlace(codigo) { return BASE + '?i=' + codigo; }
-function telefonoWa(t) {
-  var d = String(t || '').replace(/\D/g, '');
-  if (d.length === 8) d = '507' + d;
-  return d;
-}
-function textoInvitacion(inv) {
-  return 'Hola ' + inv.nombre + ', con mucho cariño te invitamos a celebrar los XV años de ' + QUINCEANERA +
-    '. Tenemos ' + inv.puestos + (Number(inv.puestos) === 1 ? ' puesto reservado' : ' puestos reservados') +
-    ' para ustedes. Mira la invitación y confirma tu asistencia aquí:\n' + enlace(inv.codigo);
-}
-
-/* ---------- Acceso ---------- */
-$('btn-ver').href = BASE;
-$('form-login').addEventListener('submit', function (e) {
-  e.preventDefault();
-  if (!API) { $('login-aviso').textContent = 'Falta la URL de Apps Script en assets/config.js.'; return; }
-  clave = $('clave').value;
-  $('login-aviso').textContent = 'Entrando…';
-  cargar().then(function () {
-    try { sessionStorage.setItem('panel-clave', clave); } catch (e) {}
-    $('login-aviso').textContent = '';
-  }).catch(function (err) {
-    $('login-aviso').textContent = err.message === 'clave' ? 'Contraseña incorrecta.' :
-      /fetch|network|load/i.test(err.message) ? 'No se pudo conectar con Google. Revisa tu internet e inténtalo de nuevo.' :
-      'Error de la hoja de Google: ' + err.message;
-  });
-});
-function salir() {
-  clave = '';
-  try { sessionStorage.removeItem('panel-clave'); } catch (e) {}
-  $('vista-panel').hidden = true; $('vista-login').hidden = false;
-}
-$('btn-salir').addEventListener('click', salir);
-
-function cargar() {
-  return llamar({ accion: 'listar' }).then(function (r) {
-    datos.invitados = r.invitados || [];
-    datos.mensajes = (r.mensajes || []).slice().reverse();
-    $('vista-login').hidden = true; $('vista-panel').hidden = false;
-    pintar();
-  });
-}
-$('btn-actualizar').addEventListener('click', function () {
-  cargar().then(function () { aviso('Lista actualizada'); }).catch(function () { aviso('No se pudo actualizar'); });
-});
-
-/* ---------- Pintar ---------- */
-function pintar() {
-  var inv = datos.invitados, tot = 0, si = 0, no = 0, pend = 0;
-  inv.forEach(function (i) {
-    var p = Number(i.puestos) || 0; tot += p;
-    if (i.respuesta === 'Sí') si += p; else if (i.respuesta === 'No') no += p; else pend += p;
-  });
-  $('r-invitaciones').textContent = inv.length;
-  $('r-puestos').textContent = tot;
-  $('r-si').textContent = si; $('r-no').textContent = no; $('r-pend').textContent = pend;
-  var b = tot || 1;
-  $('barra').innerHTML = '<i style="width:' + (si / b * 100) + '%;background:var(--si)"></i>' +
-    '<i style="width:' + (no / b * 100) + '%;background:var(--no)"></i>' +
-    '<i style="width:' + (pend / b * 100) + '%;background:var(--oro-claro)"></i>';
-  $('n-mensajes').textContent = datos.mensajes.length;
-  pintarLista();
-  pintarMensajes();
-}
-
-function pintarLista() {
-  var q = $('buscar').value.trim().toLowerCase(), f = $('filtro').value;
-  var lista = datos.invitados.filter(function (i) {
-    if (q && String(i.nombre).toLowerCase().indexOf(q) < 0 && String(i.codigo).toLowerCase().indexOf(q) < 0) return false;
-    if (f === 'pend') return !i.respuesta;
-    if (f) return i.respuesta === f;
-    return true;
-  });
-  if (!lista.length) {
-    $('lista').innerHTML = '<div class="tarjeta vacio">' + (datos.invitados.length ? 'Ningún invitado coincide.' : 'Aún no hay invitados. Agrega el primero arriba.') + '</div>';
-    return;
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function aviso(t) {
+    var el = $('toast'); el.textContent = t; el.hidden = false;
+    clearTimeout(aviso.t); aviso.t = setTimeout(function () { el.hidden = true; }, 2600);
   }
-  $('lista').innerHTML = lista.map(function (i) {
-    var est = i.respuesta === 'Sí' ? '<span class="estado si">Asistirá</span>' :
-      i.respuesta === 'No' ? '<span class="estado no">No asistirá</span>' : '<span class="estado pend">Pendiente</span>';
-    var p = Number(i.puestos) || 0;
-    return '<article class="tarjeta invitado" data-codigo="' + esc(i.codigo) + '">' +
-      '<div><h3>' + esc(i.nombre) + '</h3><div class="meta">' + p + (p === 1 ? ' puesto' : ' puestos') +
-      ' · <code>' + esc(i.codigo) + '</code>' + (i.telefono ? ' · ' + esc(i.telefono) : '') + '</div></div>' + est +
-      '<div class="botones">' +
-        '<button class="boton chico" type="button" data-accion="copiar">Copiar enlace</button>' +
-        '<button class="boton chico" type="button" data-accion="whatsapp">Enviar por WhatsApp</button>' +
-        '<button class="boton chico" type="button" data-accion="editar">Editar</button>' +
-        '<button class="boton chico peligro" type="button" data-accion="eliminar">Eliminar</button>' +
-      '</div></article>';
-  }).join('');
-}
+  function n(v) { return Number(v) || 0; }
+  function txtPuestos(p) { p = n(p); return p + (p === 1 ? ' puesto' : ' puestos'); }
+  function fecha(v) {
+    if (!v) return '';
+    var d = new Date(v);
+    return isNaN(d) ? '' : d.toLocaleString('es-PA', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' });
+  }
 
-function pintarMensajes() {
-  if (!datos.mensajes.length) { $('lista-mensajes').innerHTML = '<div class="tarjeta vacio">Todavía no hay mensajes para Emily.</div>'; return; }
-  $('lista-mensajes').innerHTML = datos.mensajes.map(function (m) {
-    var fecha = m.fecha ? new Date(m.fecha).toLocaleString('es-PA', { dateStyle: 'medium', timeStyle: 'short' }) : '';
-    return '<article class="tarjeta mensaje" data-fila="' + esc(m._fila) + '"><header><h3>' + esc(m.nombre) + '</h3><time>' + esc(fecha) + '</time></header>' +
-      '<p>' + esc(m.mensaje) + '</p><button class="boton chico peligro" type="button" data-accion="borrar-msg">Eliminar</button></article>';
-  }).join('');
-}
+  /* ---------- Servidor ---------- */
+  function llamar(cuerpo) {
+    cuerpo.clave = clave;
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(cuerpo) })
+      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (!r.ok && r.error === 'clave') { salir(); throw new Error('clave'); }
+        if (!r.ok) throw new Error(r.error || 'error');
+        return r;
+      });
+  }
 
-$('buscar').addEventListener('input', pintarLista);
-$('filtro').addEventListener('change', pintarLista);
+  /* ---------- Enlaces y mensaje ---------- */
+  function enlace(inv) {
+    return BASE + '?i=' + inv.codigo + '&n=' + encodeURIComponent(inv.nombre) + '&p=' + n(inv.puestos);
+  }
+  function mensaje(inv) {
+    return 'Hola ' + inv.nombre + ' 🌸\n\nCon mucho cariño te invitamos a celebrar los XV años de ' + QUINCE +
+      ' 🦋👑\n\nHemos reservado ' + txtPuestos(inv.puestos) + ' para ustedes.\n\n' +
+      'Abre tu invitación, confirma tu asistencia y déjale un mensaje a la quinceañera aquí:\n' + enlace(inv);
+  }
+  function telWa(t) {
+    var d = String(t || '').replace(/\D/g, '');
+    if (d.length === 8) d = '507' + d;
+    return d;
+  }
+  function abrirWa(tel, texto) {
+    window.open('https://wa.me/' + telWa(tel) + '?text=' + encodeURIComponent(texto), '_blank', 'noopener');
+  }
+  function copiar(t) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+    var a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.opacity = '0';
+    document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove();
+    return Promise.resolve();
+  }
 
-/* ---------- Pestañas ---------- */
-['invitados', 'mensajes'].forEach(function (n) {
-  $('t-' + n).addEventListener('click', function () {
-    ['invitados', 'mensajes'].forEach(function (m) {
-      $('t-' + m).setAttribute('aria-selected', m === n ? 'true' : 'false');
-      $('tab-' + m).hidden = m !== n;
-    });
+  /* ---------- Acceso ---------- */
+  $('b-ver').href = BASE;
+  $('f-login').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!API) { $('login-aviso').textContent = 'Falta conectar la hoja de Google (assets/config.js).'; return; }
+    clave = $('clave').value;
+    var b = e.target.querySelector('button'); b.disabled = true;
+    $('login-aviso').textContent = 'Entrando…';
+    cargar().then(function () {
+      try { sessionStorage.setItem('panel-emily', clave); } catch (er) {}
+      $('login-aviso').textContent = '';
+    }).catch(function (err) {
+      $('login-aviso').textContent = err.message === 'clave' ? 'Contraseña incorrecta.' :
+        /fetch|network|load/i.test(err.message) ? 'Sin conexión. Revisa tu internet.' : 'Error de la hoja de Google: ' + err.message;
+    }).then(function () { b.disabled = false; });
   });
-});
+  function salir() {
+    clave = '';
+    try { sessionStorage.removeItem('panel-emily'); } catch (e) {}
+    $('v-panel').hidden = true; $('v-login').hidden = false;
+  }
+  $('b-salir').addEventListener('click', salir);
 
-/* ---------- Copiar ---------- */
-function copiar(t) {
-  if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t);
-  var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select();
-  document.execCommand('copy'); a.remove(); return Promise.resolve();
-}
-
-/* ---------- Agregar ---------- */
-$('form-agregar').addEventListener('submit', function (e) {
-  e.preventDefault();
-  var boton = e.target.querySelector('button[type=submit]');
-  var nuevo = { nombre: $('a-nombre').value.trim(), puestos: Number($('a-puestos').value) || 1, telefono: $('a-tel').value.trim() };
-  boton.disabled = true;
-  llamar({ accion: 'agregar', nombre: nuevo.nombre, puestos: nuevo.puestos, telefono: nuevo.telefono })
-    .then(function (r) {
-      nuevo.codigo = r.codigo; nuevo.respuesta = '';
-      datos.invitados.push(nuevo);
+  function cargar() {
+    return llamar({ accion: 'listar' }).then(function (r) {
+      datos.invitados = (r.invitados || []).filter(function (i) { return i.codigo || i.nombre; });
+      datos.mensajes = (r.mensajes || []).slice().reverse();
+      $('v-login').hidden = true; $('v-panel').hidden = false;
       pintar();
-      var caja = $('nuevo-enlace');
-      caja.innerHTML = '<span>Enlace de <b>' + esc(nuevo.nombre) + '</b>:</span><code>' + esc(enlace(r.codigo)) + '</code>' +
-        '<button class="boton chico" type="button" data-accion="copiar" data-codigo="' + r.codigo + '">Copiar</button>' +
-        '<button class="boton chico" type="button" data-accion="whatsapp" data-codigo="' + r.codigo + '">WhatsApp</button>';
-      caja.hidden = false;
-      e.target.reset(); $('a-puestos').value = 2; $('a-nombre').focus();
-      aviso('Invitado agregado');
-    })
-    .catch(function () { aviso('No se pudo agregar'); })
-    .then(function () { boton.disabled = false; });
-});
-
-/* ---------- Acciones por invitado ---------- */
-document.addEventListener('click', function (e) {
-  var b = e.target.closest('[data-accion]');
-  if (!b) return;
-  var accion = b.dataset.accion;
-  if (accion === 'borrar-msg') {
-    var art = b.closest('[data-fila]');
-    if (!confirm('¿Eliminar este mensaje? No se puede deshacer.')) return;
-    llamar({ accion: 'borrarMensaje', fila: Number(art.dataset.fila) })
-      .then(cargar).then(function () { aviso('Mensaje eliminado'); })
-      .catch(function () { aviso('No se pudo eliminar'); });
-    return;
+    });
   }
-  var codigo = b.dataset.codigo || (b.closest('[data-codigo]') || {}).dataset.codigo;
-  var inv = datos.invitados.filter(function (i) { return String(i.codigo) === codigo; })[0];
-  if (!inv) return;
+  $('b-actualizar').addEventListener('click', function () {
+    cargar().then(function () { aviso('Datos actualizados'); }).catch(function () { aviso('No se pudo actualizar'); });
+  });
+  // Se actualiza solo cada minuto mientras el panel está abierto
+  setInterval(function () { if (clave && !$('v-panel').hidden && !document.hidden && !$('d-editar').open) cargar().catch(function () {}); }, 60000);
 
-  if (accion === 'copiar') {
-    copiar(textoInvitacion(inv)).then(function () { aviso('Invitación copiada'); });
-  } else if (accion === 'whatsapp') {
-    var tel = telefonoWa(inv.telefono);
-    window.open('https://wa.me/' + tel + '?text=' + encodeURIComponent(textoInvitacion(inv)), '_blank', 'noopener');
-  } else if (accion === 'editar') {
-    editando = inv;
-    $('e-nombre').value = inv.nombre; $('e-puestos').value = inv.puestos;
-    $('e-tel').value = inv.telefono || ''; $('e-resp').value = inv.respuesta || '';
-    $('dlg-editar').showModal();
-  } else if (accion === 'eliminar') {
-    if (!confirm('¿Eliminar a ' + inv.nombre + '? Su enlace dejará de funcionar.')) return;
-    llamar({ accion: 'eliminar', codigo: inv.codigo })
-      .then(cargar).then(function () { aviso('Invitado eliminado'); })
-      .catch(function () { aviso('No se pudo eliminar'); });
+  /* ---------- Pintar ---------- */
+  function pintar() {
+    var inv = datos.invitados, tot = 0, si = 0, no = 0, pend = 0;
+    inv.forEach(function (i) {
+      var p = n(i.puestos); tot += p;
+      if (i.respuesta === 'Sí') si += p; else if (i.respuesta === 'No') no += p; else pend += p;
+    });
+    $('r-inv').textContent = inv.length; $('r-tot').textContent = tot;
+    $('r-si').textContent = si; $('r-no').textContent = no; $('r-pend').textContent = pend;
+    var b = tot || 1;
+    $('barra').innerHTML = '<i style="width:' + si / b * 100 + '%;background:var(--si)"></i><i style="width:' + no / b * 100 +
+      '%;background:var(--no)"></i><i style="width:' + pend / b * 100 + '%;background:var(--oro-claro)"></i>';
+    $('n-msg').textContent = datos.mensajes.length;
+    pintarLista(); pintarConfirmaciones(); pintarMensajes();
   }
-});
 
-$('e-cancelar').addEventListener('click', function () { $('dlg-editar').close(); });
-$('form-editar').addEventListener('submit', function (e) {
-  e.preventDefault();
-  var cambios = { accion: 'editar', codigo: editando.codigo, nombre: $('e-nombre').value.trim(),
-    puestos: Number($('e-puestos').value) || 1, telefono: $('e-tel').value.trim(), respuesta: $('e-resp').value };
-  llamar(cambios).then(function () {
-    editando.nombre = cambios.nombre; editando.puestos = cambios.puestos;
-    editando.telefono = cambios.telefono; editando.respuesta = cambios.respuesta;
-    $('dlg-editar').close(); pintar(); aviso('Cambios guardados');
-  }).catch(function () { aviso('No se pudo guardar'); });
-});
+  function chip(r) {
+    return r === 'Sí' ? '<span class="chip si">Asistirá</span>' : r === 'No' ? '<span class="chip no">No asistirá</span>' : '<span class="chip pend">Pendiente</span>';
+  }
 
-/* ---------- CSV ---------- */
-$('btn-csv').addEventListener('click', function () {
-  var filas = [['Nombre', 'Puestos', 'WhatsApp', 'Respuesta', 'Código', 'Enlace']].concat(datos.invitados.map(function (i) {
-    return [i.nombre, i.puestos, i.telefono || '', i.respuesta || 'Pendiente', i.codigo, enlace(i.codigo)];
-  }));
-  var csv = '﻿' + filas.map(function (f) {
-    return f.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(',');
-  }).join('\r\n');
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
-  a.download = 'invitados-xv-emily.csv';
-  a.click();
-  setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
-});
+  function pintarLista() {
+    var q = $('buscar').value.trim().toLowerCase(), f = $('filtro').value;
+    var lista = datos.invitados.filter(function (i) {
+      if (q && (String(i.nombre) + ' ' + String(i.codigo)).toLowerCase().indexOf(q) < 0) return false;
+      if (f === 'pend') return !i.respuesta;
+      return !f || i.respuesta === f;
+    }).slice().reverse();
+    if (!lista.length) {
+      $('lista').innerHTML = '<div class="caja vacio">' + (datos.invitados.length ? 'Ningún invitado coincide.' : 'Todavía no hay invitados. Crea la primera invitación arriba.') + '</div>';
+      return;
+    }
+    $('lista').innerHTML = lista.map(function (i) {
+      return '<article class="caja inv" data-codigo="' + esc(i.codigo) + '">' +
+        '<div class="fila1"><div><h3>' + esc(i.nombre) + '</h3><div class="meta">' + txtPuestos(i.puestos) +
+        ' · <code>' + esc(i.codigo) + '</code>' + (i.telefono ? ' · ' + esc(i.telefono) : '') +
+        (i.fechaRespuesta ? ' · respondió ' + esc(fecha(i.fechaRespuesta)) : '') + '</div></div>' + chip(i.respuesta) + '</div>' +
+        '<div class="acciones">' +
+          '<button class="btn chico wa" type="button" data-acc="wa">WhatsApp</button>' +
+          '<button class="btn chico" type="button" data-acc="copiar">Copiar mensaje</button>' +
+          '<a class="btn chico" target="_blank" rel="noopener" href="' + esc(enlace(i)) + '">Ver</a>' +
+          '<button class="btn chico" type="button" data-acc="editar">Editar</button>' +
+          '<button class="btn chico peligro" type="button" data-acc="eliminar">Eliminar</button>' +
+        '</div></article>';
+    }).join('');
+  }
 
-/* Entrar directo si ya había sesión */
-if (API && clave) cargar().catch(function () { salir(); });
+  function pintarConfirmaciones() {
+    function grupo(id, filtro, vacio) {
+      var l = datos.invitados.filter(filtro).sort(function (a, b) { return String(b.fechaRespuesta).localeCompare(String(a.fechaRespuesta)); });
+      var p = l.reduce(function (s, i) { return s + n(i.puestos); }, 0);
+      $(id + '-t').textContent = l.length + (l.length === 1 ? ' invitación · ' : ' invitaciones · ') + txtPuestos(p);
+      $(id).innerHTML = l.length ? l.map(function (i) {
+        return '<li><span><b>' + esc(i.nombre) + '</b> · ' + txtPuestos(i.puestos) + '</span><span>' + esc(fecha(i.fechaRespuesta)) + '</span></li>';
+      }).join('') : '<li><span style="color:var(--suave)">' + vacio + '</span></li>';
+    }
+    grupo('c-si', function (i) { return i.respuesta === 'Sí'; }, 'Nadie ha confirmado todavía.');
+    grupo('c-no', function (i) { return i.respuesta === 'No'; }, 'Nadie ha dicho que no.');
+    grupo('c-pend', function (i) { return !i.respuesta; }, 'Todos respondieron. 🎉');
+  }
+
+  function pintarMensajes() {
+    $('lista-msg').innerHTML = datos.mensajes.length ? datos.mensajes.map(function (m) {
+      return '<article class="caja msg" data-fila="' + esc(m._fila) + '"><header><h3>' + esc(m.nombre) + '</h3><time>' + esc(fecha(m.fecha)) + '</time></header>' +
+        '<p>' + esc(m.mensaje) + '</p><button class="btn chico peligro" type="button" data-acc="borrar-msg">Eliminar</button></article>';
+    }).join('') : '<div class="caja vacio">Todavía no hay mensajes para Emily. 💌</div>';
+  }
+
+  $('buscar').addEventListener('input', pintarLista);
+  $('filtro').addEventListener('change', pintarLista);
+
+  /* ---------- Pestañas ---------- */
+  ['invitados', 'confirmaciones', 'mensajes'].forEach(function (t, _, todas) {
+    $('t-' + t).addEventListener('click', function () {
+      todas.forEach(function (o) {
+        $('t-' + o).setAttribute('aria-selected', o === t ? 'true' : 'false');
+        $('p-' + o).hidden = o !== t;
+      });
+    });
+  });
+
+  /* ---------- Nueva invitación ---------- */
+  document.querySelectorAll('[data-paso]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var c = $('n-puestos');
+      c.value = Math.min(99, Math.max(1, n(c.value) + Number(b.dataset.paso)));
+    });
+  });
+
+  function mostrarListo(inv) {
+    ultimo = inv;
+    $('l-nombre').textContent = inv.nombre;
+    $('l-puestos').textContent = txtPuestos(inv.puestos);
+    $('l-texto').value = mensaje(inv);
+    $('l-probar').href = enlace(inv);
+    $('listo').hidden = false;
+    $('listo').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  $('l-wa').addEventListener('click', function () { if (ultimo) abrirWa(ultimo.telefono, $('l-texto').value); });
+  $('l-copiar').addEventListener('click', function () { copiar($('l-texto').value).then(function () { aviso('Mensaje copiado'); }); });
+
+  $('f-nueva').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var b = e.target.querySelector('button[type=submit]');
+    var inv = { nombre: $('n-nombre').value.trim(), puestos: Math.max(1, n($('n-puestos').value)), telefono: $('n-tel').value.trim() };
+    if (!inv.nombre) return;
+    b.disabled = true; b.textContent = 'Creando…';
+    llamar({ accion: 'agregar', nombre: inv.nombre, puestos: inv.puestos, telefono: inv.telefono })
+      .then(function (r) {
+        inv.codigo = r.codigo; inv.respuesta = '';
+        datos.invitados.push(inv);
+        pintar(); mostrarListo(inv);
+        e.target.reset(); $('n-puestos').value = 2;
+        aviso('Invitación creada');
+      })
+      .catch(function (err) { if (err.message !== 'clave') aviso('No se pudo crear: ' + err.message); })
+      .then(function () { b.disabled = false; b.textContent = 'Crear invitación'; });
+  });
+
+  /* ---------- Acciones de la lista ---------- */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-acc]');
+    if (!b) return;
+    var acc = b.dataset.acc;
+    if (acc === 'borrar-msg') {
+      if (!confirm('¿Eliminar este mensaje? No se puede deshacer.')) return;
+      llamar({ accion: 'borrarMensaje', fila: n(b.closest('[data-fila]').dataset.fila) })
+        .then(cargar).then(function () { aviso('Mensaje eliminado'); }).catch(function () { aviso('No se pudo eliminar'); });
+      return;
+    }
+    var cod = (b.closest('[data-codigo]') || {}).dataset;
+    var inv = cod && datos.invitados.filter(function (i) { return String(i.codigo) === cod.codigo; })[0];
+    if (!inv) return;
+    if (acc === 'wa') abrirWa(inv.telefono, mensaje(inv));
+    else if (acc === 'copiar') copiar(mensaje(inv)).then(function () { aviso('Mensaje copiado'); });
+    else if (acc === 'editar') {
+      editando = inv;
+      $('e-nombre').value = inv.nombre; $('e-puestos').value = n(inv.puestos) || 1;
+      $('e-tel').value = inv.telefono || ''; $('e-resp').value = inv.respuesta || '';
+      $('d-editar').showModal();
+    } else if (acc === 'eliminar') {
+      if (!confirm('¿Eliminar a ' + inv.nombre + '? Su enlace dejará de mostrar sus puestos.')) return;
+      llamar({ accion: 'eliminar', codigo: inv.codigo })
+        .then(cargar).then(function () { aviso('Invitado eliminado'); }).catch(function () { aviso('No se pudo eliminar'); });
+    }
+  });
+
+  $('e-cancelar').addEventListener('click', function () { $('d-editar').close(); });
+  $('f-editar').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var c = { accion: 'editar', codigo: editando.codigo, nombre: $('e-nombre').value.trim(),
+      puestos: Math.max(1, n($('e-puestos').value)), telefono: $('e-tel').value.trim(), respuesta: $('e-resp').value };
+    llamar(c).then(function () {
+      editando.nombre = c.nombre; editando.puestos = c.puestos; editando.telefono = c.telefono; editando.respuesta = c.respuesta;
+      $('d-editar').close(); pintar(); aviso('Cambios guardados');
+    }).catch(function () { aviso('No se pudo guardar'); });
+  });
+
+  /* ---------- Excel ---------- */
+  $('b-excel').addEventListener('click', function () {
+    var filas = [['Nombre', 'Puestos', 'WhatsApp', 'Respuesta', 'Fecha respuesta', 'Código', 'Enlace']].concat(datos.invitados.map(function (i) {
+      return [i.nombre, n(i.puestos), i.telefono || '', i.respuesta || 'Pendiente', fecha(i.fechaRespuesta), i.codigo, enlace(i)];
+    }));
+    var csv = '﻿' + filas.map(function (f) { return f.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\r\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+    a.download = 'invitados-xv-emily.csv'; a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+
+  if (API && clave) cargar().catch(function () { salir(); });
+})();
 </script>
 </body>
 </html>

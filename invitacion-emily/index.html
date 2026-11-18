@@ -317,7 +317,7 @@ dialog img { max-width: 94vw; max-height: 94svh; border: 1px solid var(--oro-cla
     <p style="font-size:13px">El rosa gold está reservado para la quinceañera.</p>
   </section>
 
-  <section class="panel revelar" id="reservado">
+  <section class="panel revelar" id="reservado" hidden>
     <h2 class="script">Hemos reservado para ti</h2>
     <svg class="divisor" viewBox="0 0 250 26" aria-hidden="true"><use href="#divisor"/></svg>
     <p class="script res-nombre" id="res-nombre" hidden></p>
@@ -409,13 +409,12 @@ dialog img { max-width: 94vw; max-height: 94svh; border: 1px solid var(--oro-cla
 </button>
 <div id="reproductor" aria-hidden="true"></div>
 
-<script src="assets/config.js?v=4"></script>
+<script src="assets/config.js?v=5"></script>
 <script>
 /* ===== Datos editables ===== */
 var CONFIG = {
   quinceanera: 'Emily',
   whatsapp: '50762170715',              // WhatsApp de contacto y confirmación (Panamá)
-  puestos: 4,                           // Puestos reservados por defecto
   fotosUrl: 'https://drive.google.com/drive/folders/1wg7DTcs26CcNWpCnTQS3dC_7GPNXdCoW?usp=sharing', // Carpeta de Drive para subir fotos
   video: 'ql8P2m8uBg4',                 // Canción de YouTube
   evento: new Date('2026-12-26T16:30:00-05:00')
@@ -521,37 +520,39 @@ function guardar(datos) {
   }).then(function (r) { return r.json(); });
 }
 
-/* Invitado: ?i=CODIGO (desde el panel) o ?n=Nombre&p=4 */
+/* Invitado personal: ?i=CODIGO&n=Nombre&p=Puestos (lo genera el panel) */
 var params = new URLSearchParams(location.search);
 var codigo = (params.get('i') || '').toUpperCase();
+if (!/^[A-Z]{6}$/.test(codigo)) codigo = '';
 var invitado = (params.get('n') || '').trim().slice(0, 80);
 var puestos = parseInt(params.get('p'), 10);
-if (!(puestos > 0 && puestos < 100)) puestos = CONFIG.puestos;
-var invitadoRegistrado = false;
+if (!(puestos > 0 && puestos < 100)) puestos = 0;
+var esPersonal = !!(codigo || invitado);
 
-function mostrarPuestos() {
-  document.getElementById('res-numero').textContent = puestos;
-  document.getElementById('res-texto').textContent = puestos === 1 ? 'puesto' : 'puestos';
-  document.getElementById('res-frase').textContent = puestos + (puestos === 1 ? ' puesto reservado' : ' puestos reservados');
+function mostrarInvitado(nombre, cantidad) {
+  if (nombre) {
+    var rn = document.getElementById('res-nombre');
+    rn.textContent = nombre; rn.hidden = false;
+    document.getElementById('conf-nombre').value = nombre;
+    document.getElementById('msg-nombre').value = nombre;
+    document.getElementById('campo-nombre').hidden = true;
+  }
+  if (cantidad > 0) {
+    puestos = cantidad;
+    document.getElementById('res-numero').textContent = cantidad;
+    document.getElementById('res-texto').textContent = cantidad === 1 ? 'puesto' : 'puestos';
+    document.getElementById('res-frase').textContent = cantidad + (cantidad === 1 ? ' puesto reservado' : ' puestos reservados');
+  }
+  // "Hemos reservado para ti" solo aparece en enlaces personales con puestos
+  document.getElementById('reservado').hidden = !(esPersonal && puestos > 0);
 }
-function mostrarNombre(nombre) {
-  if (!nombre) return;
-  var rn = document.getElementById('res-nombre');
-  rn.textContent = nombre; rn.hidden = false;
-  document.getElementById('conf-nombre').value = nombre;
-  document.getElementById('msg-nombre').value = nombre;
-}
-mostrarPuestos();
-mostrarNombre(invitado);
-// Con enlace personal (?i=) los puestos se muestran solo cuando llegan de la hoja
-var conCodigo = !!(API && /^[A-Z]{6}$/.test(codigo));
-if (conCodigo) document.getElementById('reservado').hidden = true;
+mostrarInvitado(invitado, puestos);
 
 /* Enlaces */
 function wa(texto) { return 'https://wa.me/' + CONFIG.whatsapp + (texto ? '?text=' + encodeURIComponent(texto) : ''); }
 document.getElementById('btn-fotos').href = CONFIG.fotosUrl;
 
-/* Confirmación */
+/* Confirmación de asistencia */
 var respuestas = document.querySelectorAll('[data-respuesta]');
 var confNombre = document.getElementById('conf-nombre');
 var confEstado = document.getElementById('conf-estado');
@@ -561,7 +562,7 @@ function marcar(boton) {
 }
 function prepararEnvio(boton, nombre) {
   var texto = 'Hola, soy ' + nombre + ', ' + boton.dataset.respuesta + ' a los XV años de ' + CONFIG.quinceanera +
-    ' (' + puestos + (puestos === 1 ? ' puesto' : ' puestos') + ').';
+    (puestos > 0 ? ' (' + puestos + (puestos === 1 ? ' puesto' : ' puestos') + ')' : '') + '.';
   document.getElementById('conf-wa').href = wa(texto);
   document.getElementById('enviar').hidden = false;
 }
@@ -574,28 +575,24 @@ respuestas.forEach(function (b) {
     prepararEnvio(b, nombre);
     if (!API) { confEstado.textContent = ''; return; }
     confEstado.textContent = 'Guardando tu respuesta…';
-    guardar({ accion: 'confirmar', codigo: invitadoRegistrado ? codigo : '', nombre: nombre, puestos: puestos, respuesta: b.dataset.valor })
+    guardar({ accion: 'confirmar', codigo: codigo, nombre: nombre, puestos: puestos || 1, respuesta: b.dataset.valor })
       .then(function (r) {
         if (!r.ok) throw new Error(r.error);
         confEstado.textContent = '¡Gracias! Tu respuesta quedó registrada.';
       })
       .catch(function () {
-        confEstado.textContent = 'No pudimos guardar tu respuesta. Envíala por WhatsApp o correo.';
+        confEstado.textContent = 'No pudimos guardar tu respuesta. Envíala por WhatsApp.';
       });
   });
 });
 
-if (API && /^[A-Z]{6}$/.test(codigo)) {
+/* Con código: la hoja tiene la última palabra (puestos editados, respuesta previa) */
+if (API && codigo) {
   fetch(API + '?accion=invitado&i=' + codigo)
     .then(function (r) { return r.json(); })
     .then(function (r) {
       if (!r.ok) return;
-      invitadoRegistrado = true;
-      puestos = r.puestos;
-      mostrarPuestos();
-      document.getElementById('reservado').hidden = false;
-      mostrarNombre(r.nombre);
-      document.getElementById('campo-nombre').hidden = true;
+      mostrarInvitado(r.nombre, Number(r.puestos) || puestos);
       if (r.respuesta) {
         var boton = document.querySelector('[data-valor="' + (r.respuesta === 'Sí' ? 'si' : 'no') + '"]');
         marcar(boton);
@@ -620,7 +617,7 @@ document.getElementById('form-mensaje').addEventListener('submit', function (e) 
   var estado = document.getElementById('msg-estado');
   boton.disabled = true;
   estado.textContent = 'Enviando tu mensaje…';
-  guardar({ accion: 'mensaje', codigo: invitadoRegistrado ? codigo : '', nombre: nombre, mensaje: texto })
+  guardar({ accion: 'mensaje', codigo: codigo, nombre: nombre, mensaje: texto })
     .then(function (r) {
       if (!r.ok) throw new Error(r.error);
       campo.value = '';
