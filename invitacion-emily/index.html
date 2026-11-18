@@ -543,6 +543,9 @@ function mostrarNombre(nombre) {
 }
 mostrarPuestos();
 mostrarNombre(invitado);
+// Con enlace personal (?i=) los puestos se muestran solo cuando llegan de la hoja
+var conCodigo = !!(API && /^[A-Z]{6}$/.test(codigo));
+if (conCodigo) document.getElementById('reservado').hidden = true;
 
 /* Enlaces */
 function wa(texto) { return 'https://wa.me/' + CONFIG.whatsapp + (texto ? '?text=' + encodeURIComponent(texto) : ''); }
@@ -590,6 +593,7 @@ if (API && /^[A-Z]{6}$/.test(codigo)) {
       invitadoRegistrado = true;
       puestos = r.puestos;
       mostrarPuestos();
+      document.getElementById('reservado').hidden = false;
       mostrarNombre(r.nombre);
       document.getElementById('campo-nombre').hidden = true;
       if (r.respuesta) {
